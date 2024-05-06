@@ -11,8 +11,6 @@ if [ ! -f "$FILE_PATH" ]; then
     chown $USER:elite $FILE_PATH
     exit 0
 fi
-# Read the last line from the file, assuming it's the release time
-RELEASE_TIME_SEC=$(tail -n 1 "$FILE_PATH")
 
 # Convert release time and current time to seconds since the epoch for comparison
 CURRENT_TIME_SEC=$(date +%s)
