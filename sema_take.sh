@@ -70,7 +70,7 @@ echo "You requested semaphore: " $1
 echo "Time now               : " $CURRENT_DATE
 echo "You got semaphore till : " $RELEASE_DATE
 
-output=$(echo 'wall -g $USER "Your semaphore expired. Use sema_take 10min"'  | at -t $RELEASE_DATE_AT 2>&1 | grep -v "warning:"| grep -oP '(?<=job )\d+')
+output=$(echo 'wall -g $USER "$USER semaphore expired. Use sema_take 10min"'  | at -t $RELEASE_DATE_AT 2>&1 | grep -v "warning:"| grep -oP '(?<=job )\d+')
 echo "$output" >> $FILE
 
 $SCRIPT_DIR/sema_log.sh $@
