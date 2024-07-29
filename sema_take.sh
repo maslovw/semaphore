@@ -27,7 +27,7 @@ else
     SEMA_FORCE=0
 
     SEMA_TEST=$($SCRIPT_DIR/sema_test.sh)
-    if [ $? -ne 0 ]; then
+    if [ $? -eq 255 ]; then
         echo $SEMA_TEST
         exit 1
     fi
@@ -55,7 +55,7 @@ else
 fi
 
 if [ -f "$FILE" ]; then
-    SEMA_AT_JOB_NUMBER=$(sed -n '6p' $FILE)
+    SEMA_AT_JOB_NUMBER=$(sed -n '7p' $FILE)
     atrm $SEMA_AT_JOB_NUMBER  > /dev/null 2>&1
 fi
 
@@ -65,6 +65,8 @@ echo $CURRENT_DATE  >> $FILE
 echo $CURRENT_TIME_IN_SEC  >> $FILE
 echo $RELEASE_DATE  >> $FILE
 echo $RELEASE_TIME_IN_SEC  >> $FILE
+echo $SSH_CLIENT | awk '{ print $1}' >> $FILE # SEMA_USER_IP
+
 
 echo "You requested semaphore: " $1
 echo "Time now               : " $CURRENT_DATE
