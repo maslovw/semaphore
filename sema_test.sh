@@ -42,6 +42,11 @@ CURRENT_USER_IP=$(echo $SSH_CLIENT | awk '{ print $1}')
 
 # Read semaphore details from the file
 SEMA_USER=$(sed -n '1p' "$FILE_PATH")
+if [ -z "$SEMA_USER" ]; then
+    #echo "Error: Failed to read SEMA_USER or file is empty"
+    exit $EXIT_SUCCESS
+fi
+
 SEMA_CURRENT_DATE=$(sed -n '2p' "$FILE_PATH")
 SEMA_CURRENT_TIME_IN_SEC=$(sed -n '3p' "$FILE_PATH")
 SEMA_RELEASE_DATE=$(sed -n '4p' "$FILE_PATH")

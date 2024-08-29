@@ -12,6 +12,7 @@ if [ "$1" == "--help" ]; then
     echo "Example: sema_take.sh 30min"
     echo "Example: sema_take.sh 2hours"
     echo "[Note]it's possible to take semaphore with --force"
+
     exit 2
 fi
 
@@ -32,6 +33,11 @@ else
         exit 1
     fi
 
+fi
+
+if [ ! -f "$FILE" ]; then
+    touch "$FILE"
+    chmod o+rw "$FILE"
 fi
 
 DURATION=$1
